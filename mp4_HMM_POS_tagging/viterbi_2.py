@@ -21,9 +21,9 @@ def viterbi_2(train, test):
     
     predicted_sentences = []
     for test_count, sentence in enumerate(test):
-        # --> Construct Trellis
+        # --> Construct trellis --> {word1:{NOUN: (p, (word0_w/_max_p, prev_tag_w/_max_p)), ADJ: (p, (word0_w/_max_p, prev_tag_w/_max_p)), ...}, word2:{NOUN: (p, (word1_w/_max_p, prev_tag_w/_max_p)), ADJ: (p, (word1_w/_max_p, prev_tag_w/_max_p)), ...}, ...}
         trellis, final_tag = buildTrellis(sentence, all_tags, all_words, min_prob, default_tag, tuning_constant, initial_word_count, hapax_n, initial, transition, emission, hapax)
-        # --> build predicted sentences w/ (word, predicted_tag) 
+        #  --> build predicted_sentences --> [(word1, predicted_tag1), (word2, predicted_tag2), ...] 
         predicted_sentences.append(buildSentence(final_tag, trellis, sentence))
     return predicted_sentences
 
